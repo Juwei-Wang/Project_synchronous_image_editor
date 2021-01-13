@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Account Recovery</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        // User's username should be >= 6
+        function usernameMinimalLength(s) {
+            return s.length >= 6;
+        }
+
+        // User's username should be <= 36
+        function usernameMaximalLength(s) {
+            return s.length <= 36;
+        }
+
+        // User's username contains 0-9A-Za-z and underscores only, we keep this simplicity to avoid encoding issues
+        function usernameValidCharset(s) {
+            const r = /^([a-z0-9A-Z_]+)$/;
+            return r.test(s);
+        }
+
+        // User's password should be >= 6
+        function userPasswordMinimalLength(s) {
+            return s.length >= 6;
+        }
+
+        // User's password should be <= 256
+        function userPasswordMaximalLength(s) {
+            return s.length <= 256;
+        }
+
+        // User's password must be printable ASCII
+        function userPasswordValidCharset(s) {
+            const set = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+            for (let x of s) {
+                if (set.indexOf(x) === -1) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        window.onload = function () {
+            // var myStylesLocation = "/style.css";
+            // $.get(myStylesLocation, function (css) {
+            //     $('<style type="text/css"></style>')
+            //         .html(css)
+            //         .appendTo("head");
+            // });
+
+            $('#reset').click((function () {
+                $('#username').empty();
+                $('#answer').empty();
+                $('#newPassword').empty();
+                $('#newPasswordConfirmation').empty();
+            }));
+
+            $('#recover_submit').click(function () {
+
+                // obtain the values in the input box
+                const username = $('#username').val();
+                const answer = $('#answer').val();
+                const newPassword = $('#newPassword').val();
+                const newPasswordConfirmation = $('#newPasswordConfirmation').val();
+
+                // Username Format Check
+                if (usernameMinimalLength(username)) {
+                    alert("The length of the user's username should be >= 6");
+                    return;
+                }
+                if (usernameMaximalLength(username)) {
+                    alert("The length of the user's username should be <= 36");
+                    return;
+                }
+                if (usernameValidCharset(username)) {
+                    alert("User's username contains 0-9A-Za-z and underscores only!");
+                    return;
+                }
+
+                // Password Format Check
+                if (userPasswordMinimalLength(newPassword)) {
+                    alert("The length of the user's password should be >= 6")
+                    return;
+                }
+                if (userPasswordMaximalLength(newPassword)) {
+                    alert("The length of the user's password should be <= 256")
+                    return;
+                }
+                if (userPasswordValidCharset(newPassword)) {
+                    alert("User's password must be printable ASCII!");
+                    return;
+                }
+
+                // The user failed to confirm the new password
+                if (newPasswordConfirmation !== newPassword) {
+                    alert("The confirmation of the new password failed!");
+                    return;
+                }
+
+                // No format issues, pass the arguments to the database
+                $.ajax({
+                    type: "post",
+                    url: "http://35.230.37.124/recover",
+                    dataType: "JSON",
+                    date: JSON.stringify(
+                        {
+                            "username": username,
+                            "answer": answer,
+                            "newPassword": newPassword
+                        }
+                    ),
+                    success: (res) => {
+                        switch (res["ret"]) {
+                            case -1:
+                                alert("The username does not exist!");
+                                break;
+                            case 0:
+                                alert("The answer is incorrect!");
+                                break;
+                            case 1:
+                                alert("Password reset!");
+                                window.location.href = 'index.html';
+                                break;
+                            default:
+                                break;
+                        }
+                    },
+                    error: () => {
+                        console.log('process error');
+                    }
+                });
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Landing Page -->
+
+    <!-- Right side is an image of the logo
+         Left side is a log in portal: username & password
+         Below, include buttons to Log in or Sign up/Create an Account -->
+
+    <img class="bodyLogo" id="bodyLogo" src="logo.png" alt="logo">
+    <h1 class="loginAppName">Image-O-City</h1>
+    <div class="verticalLine"></div>
+
+    <div class="login">
+        <div class="login-credentials">
+            <label>Username or Email</label>
+            <input id="username" placeholder="Username" required type="text">
+            <label>Security Question</label>
+            <input id="question" placeholder="Security" required type="text">
+            <label>Answer</label>
+            <input id="answer" placeholder="Answer of Security Question" required type="text">
+            <label>New Password</label>
+            <input id="newPassword" placeholder="New Password" required type="password">
+            <label>Confirmation of New Password</label>
+            <input id="newPasswordConfirmation" placeholder="Confirm New Password" required type="password">
+            <br>
+            <button id="reset">Reset</button>
+            <br>
+            <button id="recover_account">Recover</button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="account_options">
+        <a href="index.html">HomePage</a>
+    </div>
+</body>
+
+</html>

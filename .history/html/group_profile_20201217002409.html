@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Group Profile</title>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        // toggle showing and hiding dropdown
+        function toggleDropdown(elem) {
+            $('.show').removeClass('show');
+            $(elem).next().toggleClass("show");
+        }
+
+        // close dropdown
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+        window.onload = function () {
+            // $.ajax({
+            //     type: "post",
+            //     url: "http://35.230.37.124:8081/check_session",
+            //     //server sent back response
+            //     success: (res) => {
+            //         switch (res["ret"]) {
+            //             case 1:
+            //                 break;
+            //             case -1:
+            //                 alert('You didnt Login, bro. Back to the login page.');
+            //                 setTimeout(() => { window.location.href = 'index.html' }, 3000);
+            //                 break;
+            //         }
+            //     },
+            //     error: () => {
+            //         console.log('process error');
+            //     }
+            // });
+
+            $('#logout').click(
+                function (){
+                    $.ajax({
+                        type: "post",
+                        url: "http://35.230.37.124:8081/delete_session",
+                        //server sent back respons
+                        success: (res) => {
+                            switch (res["ret"]) {
+                                case "1":
+                                    window.location.href = 'index.html';
+                                    break;
+                                case "-1":
+                                    alert("Logout failed");
+                                    window.location.href = 'index.html';
+                                    break;
+                            }
+                        }
+                    })
+                }
+            );
+
+            $('#join_team').click(function () {
+                var join_teamID = prompt("Please enter the six-digit code for the team you wish to join: ", "xxxxxx");
+                if (join_teamID.length != 6 && isNaN(join_teamID)) {
+                    alert("Wrong format!");
+                    join_teamID = prompt("Please enter the six-digit code for the team you wish to join: ", "xxxxxx");
+                }
+                $.ajax({
+                    type: "post",
+                    url: "http://35.230.37.124/group_profile",
+                    dataType: "JSON",
+                    data: JSON.stringify(
+                        {
+                            "teamID": join_teamID
+                        }
+                    ),
+                    success: (res) => {
+                        switch (res["ret"]) {
+                            case 0:
+                                alert("Team joined successful!");
+                                break;
+                            case 1:
+                                alert("Team doesn't exist!");
+                                break;
+                            case 2:
+                                alert("Unknown error!");
+                                break;
+                            default:
+                                break;
+                        }
+                    },
+                    error: () => {
+                        console.log('process error');
+                    }
+                });
+            });
+            $('#create_team').click(function () {
+                // const max = 999999;
+                // const min = 100000;
+                // var create_teamID = Math.floor(Math.random() * (max - min + 1) + min);
+                $.ajax({
+                    type: "post",
+                    url: "http://35.230.37.124/group_profile",
+                    success: (res) => {
+                        switch (res["ret"]) {
+                            case 1:
+                                alert("Team created!");
+                                break;
+                            case -1:
+                                alert("Unknown error!");
+                                break;
+                            default:
+                                break;
+                        }
+                    },
+                    error: () => {
+                        console.log('process error');
+                        createTeam(create_teamID);
+                    }
+                });
+            });
+            $('#leave_team').click(function () {
+                var leave_teamID;
+                $.ajax({
+                    type: "post",
+                    url: "http://35.230.37.124/group_profile",
+                    dataType: "JSON",
+                    data: JSON.stringify(
+                        {
+                            teamID: leave_teamID
+                        }
+                    ),
+                    success: (res) => {
+                        switch (res["ret"]) {
+                            case 0:
+                                //remove team
+                                break;
+                            case 1:
+                                alert("Unknown error!");
+                                break;
+                            default:
+                                break;
+                        }
+                    },
+                    error: () => {
+                        console.log('process error');
+                        leaveTeam(this);
+                    }
+                });
+            });
+        };
+
+
+        //Create Team and Tab (increments the last team id and does not use the actual create team id)
+        function createTeam(teamCode) {
+            var lastTab = $('.tab-content').find('.tab-pane:last');
+            var newId = 1;
+            if (lastTab.attr('id')) {
+                var lastId = parseInt(lastTab.attr('id').split('-')[1]);
+                newId = lastId + 1;
+            }
+
+            var pill = `<li id=\"teamPill-${newId}\", style="font-size: 20px;"><a data-toggle=\"pill\" href=\"#team-${newId}\">Team ${newId}</a></li>`;
+            $('.nav-pills').append(pill);
+
+            var tab = `<div id=\"team-${newId}\" class=\"tab-pane fade\">
+                <div class="group-profile-header">
+                    <p>Team Code: ${teamCode}</p>
+                    <button id=\"leave_team\">Leave Selected Team</button>
+                </div>
+                <div class="group-profile-body">
+                    <div class=\"member-list-wrapper\">
+                        <div class=\"member-list\">
+                            <h3>Members</h3>
+                            <button id=\"add-member\">Add New Member</button>
+                        </div>
+                        <ul class="retrieved-member-list"></ul>
+                    </div>
+                    <div class=\"team-projects\">
+                        <div class="team-projects-header">
+                            <h3>Team Projects</h3>
+                            <button id=\"add-project\"><a href="image_edit.html" style="color: black;">Add New Project</a></button>
+                        </div>
+                        <div class=\"profileFlexContainer\">
+                            <div class=\"group-project-list\">
+                                <img class=\"imageIcon\" src=\"image.png\">
+                                <button class=\"group-project-btn\">Edit</button>
+                            </div>
+                            <div class=\"group-project-list\">
+                                <img class=\"imageIcon\" src=\"image.png\">
+                                <button class=\"group-project-btn\">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            $('.tab-content').append(tab);
+            $(document).on('click', `#${$(tab).attr('id')} #leave_team`, () => {
+                deleteTeam($(tab).attr('id'), $(pill).attr('id'));
+            });
+        }
+
+        //Delete team and tab
+        function deleteTeam(tab, pill) {
+            $(`#${tab}`).remove();
+            $(`#${pill}`).remove();
+        }
+
+        // function start() {
+        //     $('#join_team').click(function () {
+        //         var join_teamID = prompt("Please enter the six-digit code for the team you wish to join: ", "xxxxxx");
+        //         if (join_teamID.length != 6 && isNaN(join_teamID)) {
+        //             alert("Wrong format!");
+        //             join_teamID = prompt("Please enter the six-digit code for the team you wish to join: ", "xxxxxx");
+        //         }
+        //         $.ajax({
+        //             type: "post",
+        //             url: "http://35.230.37.124/group_profile",
+        //             dataType: "JSON",
+        //             data: JSON.stringify(
+        //                 {
+        //                     teamID: join_teamID
+        //                 }
+        //             ),
+        //             success: (res) => {
+        //                 switch (res["ret"]) {
+        //                     case 0:
+        //                         alert("Team joined successful!");
+        //                         break;
+        //                     case 1:
+        //                         alert("Team doesn't exist!");
+        //                         break;
+        //                     case 2:
+        //                         alert("Unknown error!");
+        //                         break;
+        //                     default:
+        //                         break;
+        //                 }
+        //             },
+        //             error: () => {
+        //                 console.log('process error');
+        //             }
+        //         });
+        //     });
+        //     $('#create_team').click(function () {
+        //         const max = 999999;
+        //         const min = 100000;
+        //         var create_teamID = Math.floor(Math.random() * (max - min + 1) + min);
+        //         $.ajax({
+        //             type: "post",
+        //             url: "http://35.230.37.124/group_profile",
+        //             dataType: "JSON",
+        //             data: JSON.stringify(
+        //                 {
+        //                     teamID: create_teamID
+        //                 }
+        //             ),
+        //             success: (res) => {
+        //                 switch (res["ret"]) {
+        //                     case 0:
+        //                         alert("Team created!");
+        //                         break;
+        //                     case 1:
+        //                         alert("Unknown error!");
+        //                         break;
+        //                     default:
+        //                         break;
+        //                 }
+        //             },
+        //             error: () => {
+        //                 console.log('process error');
+        //                 createTeam(create_teamID);
+        //             }
+        //         });
+        //     });
+        //     $('#leave_team').click(function () {
+        //         var leave_teamID;
+        //         $.ajax({
+        //             type: "post",
+        //             url: "http://35.230.37.124/group_profile",
+        //             dataType: "JSON",
+        //             data: JSON.stringify(
+        //                 {
+        //                     teamID: leave_teamID
+        //                 }
+        //             ),
+        //             success: (res) => {
+        //                 switch (res["ret"]) {
+        //                     case 0:
+        //                         //remove team
+        //                         break;
+        //                     case 1:
+        //                         alert("Unknown error!");
+        //                         break;
+        //                     default:
+        //                         break;
+        //                 }
+        //             },
+        //             error: () => {
+        //                 console.log('process error');
+        //                 leaveTeam(this);
+        //             }
+        //         });
+        //     });
+        // };
+        // window.onload = start;
+    </script>
+</head>
+
+<body>
+
+<!-- Header Bar: logo, webapp name, notification bell, my account -->
+<div class="header">
+    <img class="headerLogo" src="logo.png" alt="logo">
+    <h1 class="header-center"> Image-O-City</h1>
+
+    <div class="header-right">
+        <!-- Drop down for Notifications -->
+        <div class="dropdown">
+            <input type='image' src="bell.png" class="dropbtn" onclick="toggleDropdown(this)"/>
+            <div id="notifDropdown" class="dropdown-content">
+                <a href="#">You've been added to team [team code]</a>
+            </div>
+        </div>
+        <!-- Drop down for My Account-->
+        <div class="dropdown">
+            <input type='image' src="account.png" class="dropbtn" onclick="toggleDropdown(this)"/>
+            <div id="accountDropdown" class="dropdown-content">
+                <a href="user_profile.html">My Profile</a>
+                <a href="group_profile.html">Group Profile</a>
+                <a href="account_recovery.html">Change Password</a>
+                <button id="logout"> Log Out</button>
+                <!-- <a href="index.html">Log Out</a> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Profile Page -->
+<div class="group-container">
+    <div class="group-container-header">
+        <h2>Team Profile</h2>
+        <div class="tab">
+            <button id="create_team">Create a New Team</button>
+            <button id="join_team">Join a Team</button>
+        </div>
+    </div>
+
+    <ul class="nav nav-pills"></ul>
+
+    <div class="tab-content"></div>
+
+</div>
+
+</body>
+
+</html>

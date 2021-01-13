@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2f7cb4bf-63c9-46c5-9d05-3212eb6ea642" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1kqCWPWiThAwCdBnydAQkipfZXJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.15.0" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://35.230.37.124/index.html">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2f7cb4bf-63c9-46c5-9d05-3212eb6ea642" name="Default Changelist" comment="" />
+      <created>1606418765597</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606418765597</updated>
+      <workItem from="1606418767762" duration="46000" />
+      <workItem from="1606418818949" duration="312000" />
+      <workItem from="1606419149820" duration="91000" />
+      <workItem from="1606419274744" duration="729000" />
+      <workItem from="1607028372272" duration="1007000" />
+      <workItem from="1607063034293" duration="1000" />
+      <workItem from="1607068226835" duration="15000" />
+      <workItem from="1607073049555" duration="356000" />
+      <workItem from="1607391134122" duration="1537000" />
+      <workItem from="1607465009083" duration="2673000" />
+      <workItem from="1607478008158" duration="1814000" />
+      <workItem from="1607494641164" duration="545000" />
+      <workItem from="1607497102439" duration="9000" />
+      <workItem from="1607631142584" duration="1936000" />
+      <workItem from="1607654516538" duration="113000" />
+      <workItem from="1607718891513" duration="1767000" />
+      <workItem from="1607764457961" duration="2201000" />
+      <workItem from="1607817112263" duration="2889000" />
+      <workItem from="1607910064555" duration="355000" />
+      <workItem from="1607910477452" duration="6000" />
+      <workItem from="1607910527514" duration="2720000" />
+      <workItem from="1608175379125" duration="3365000" />
+      <workItem from="1608777310562" duration="126000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="320" y="122" key="#Deployment" timestamp="1606419046641">
+      <screen x="0" y="23" width="1440" height="826" />
+    </state>
+    <state x="320" y="122" key="#Deployment/0.23.1440.826@0.23.1440.826" timestamp="1606419046641" />
+    <state x="437" y="301" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1607631156065">
+      <screen x="0" y="23" width="1440" height="825" />
+    </state>
+    <state x="437" y="301" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.23.1440.825@0.23.1440.825" timestamp="1607631156065" />
+    <state x="564" y="343" width="312" height="227" key="DBNavigator.ConnectionAuthenticationDialog" timestamp="1606419435825">
+      <screen x="0" y="23" width="1440" height="826" />
+    </state>
+    <state x="564" y="343" width="312" height="227" key="DBNavigator.ConnectionAuthenticationDialog/0.23.1440.826@0.23.1440.826" timestamp="1606419435825" />
+    <state x="308" y="179" key="DBNavigator.DatasetFilterDialog" timestamp="1606419573729">
+      <screen x="0" y="23" width="1440" height="826" />
+    </state>
+    <state x="308" y="179" key="DBNavigator.DatasetFilterDialog/0.23.1440.826@0.23.1440.826" timestamp="1606419573729" />
+    <state x="258" y="119" key="DBNavigator.ProjectSettingsDialog" timestamp="1606419501113">
+      <screen x="0" y="23" width="1440" height="826" />
+    </state>
+    <state x="258" y="119" key="DBNavigator.ProjectSettingsDialog/0.23.1440.826@0.23.1440.826" timestamp="1606419501113" />
+    <state x="200" y="122" width="1240" height="586" key="DirDiffDialog" timestamp="1608508077980">
+      <screen x="0" y="23" width="1440" height="825" />
+    </state>
+    <state x="200" y="122" width="1240" height="586" key="DirDiffDialog/0.23.1440.825@0.23.1440.825" timestamp="1608508077980" />
+    <state x="152" y="150" width="1240" height="587" key="DirDiffDialog/0.23.1440.827@0.23.1440.827" timestamp="1607466285301" />
+    <state width="1358" height="167" key="GridCell.Tab.0.bottom" timestamp="1608176126963">
+      <screen x="0" y="23" width="1440" height="825" />
+    </state>
+    <state width="1358" height="167" key="GridCell.Tab.0.bottom/0.23.1440.825@0.23.1440.825" timestamp="1608176126963" />
+    <state width="1358" height="167" key="GridCell.Tab.0.center" timestamp="1608176126962">
+      <screen x="0" y="23" width="1440" height="825" />
+    </state>
+    <state width="1358" height="167" key="GridCell.Tab.0.center/0.23.1440.825@0.23.1440.825" timestamp="1608176126962" />
+    <state width="1358" height="167" key="GridCell.Tab.0.left" timestamp="1608176126962">
+      <screen x="0" y="23" width="1440" height="825" />
+    </state>
+    <state width="1358" height="167" key="GridCell.Tab.0.left/0.23.1440.825@0.23.1440.825" timestamp="1608176126962" />
+    <state width="1358" height="167" key="GridCell.Tab.0.right" timestamp="1608176126962">
+      <screen x="0" y="23" width="1440" height="825" />
+    </state>
+    <state width="1358" height="167" key="GridCell.Tab.0.right/0.23.1440.825@0.23.1440.825" timestamp="1608176126962" />
+    <state x="221" y="94" key="SettingsEditor" timestamp="1606419240100">
+      <screen x="0" y="23" width="1440" height="826" />
+    </state>
+    <state x="221" y="94" key="SettingsEditor/0.23.1440.826@0.23.1440.826" timestamp="1606419240100" />
+    <state x="610" y="195" key="ftp.server.browser" timestamp="1606418894370">
+      <screen x="0" y="23" width="1440" height="826" />
+    </state>
+    <state x="610" y="195" key="ftp.server.browser/0.23.1440.826@0.23.1440.826" timestamp="1606418894370" />
+    <state x="385" y="106" width="670" height="676" key="search.everywhere.popup" timestamp="1606419030861">
+      <screen x="0" y="23" width="1440" height="826" />
+    </state>
+    <state x="385" y="106" width="670" height="676" key="search.everywhere.popup/0.23.1440.826@0.23.1440.826" timestamp="1606419030861" />
+  </component>
+</project>
